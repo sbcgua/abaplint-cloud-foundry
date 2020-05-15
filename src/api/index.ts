@@ -1,5 +1,6 @@
 import * as express from "express";
 import { checkObject, CheckObjectOutput } from "./check_object";
+import { handler as getDefaultConfigHandler } from "./get_default_configuration";
 import { addInfoEx } from "../lib/log-tail";
 import {
   createErrorResponse,
@@ -40,8 +41,12 @@ router.post("/check_file", (req, res) => {
   res.json(createSuccessResponse<CheckObjectOutput>(result));
 });
 
+router.get("/get_default_configuration", (req, res) => {
+  addInfoEx("get_default_configuration");
+  getDefaultConfigHandler(req, res);
+});
+
 // app.post("/api/v1/check_configuration",
-// app.post("/api/v1/get_default_configuration",
 // app.post("/api/v1/pretty_print",
 
 router.all("*", (req, res) => {
