@@ -1,6 +1,6 @@
 import * as express from "express";
-import { checkObject, CheckObjectOutput } from "./check_object";
-import { getDefaultConfig, GetDefaultConfigOutput } from "./lint_config";
+import { checkObject } from "./check_object";
+import { getDefaultConfig } from "./lint_config";
 import { addInfoEx } from "../lib/log-tail";
 import {
   createErrorResponse,
@@ -20,7 +20,7 @@ router.get("/ping", (_req, res) => {
 
 router.get("/default_config", (_,res) => {
   const defaultConfig = getDefaultConfig();
-  res.json(createSuccessResponse<GetDefaultConfigOutput>(defaultConfig));
+  res.json(createSuccessResponse(defaultConfig));
 });
 
 router.post("/check_file", (req, res) => {
@@ -43,7 +43,7 @@ router.post("/check_file", (req, res) => {
     `${req.socket.bytesRead} bytes`,
     `${(hrend[0] * 1000 + hrend[1] / 1000000).toFixed()} ms`,
   ]);
-  res.json(createSuccessResponse<CheckObjectOutput>(result));
+  res.json(createSuccessResponse(result));
 });
 
 // app.post("/api/v1/check_configuration",

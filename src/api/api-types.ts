@@ -27,7 +27,10 @@ export function createSuccessStringResponse(payload: string): ApiResponseSuccess
   };
 }
 
-export function createSuccessResponse<T>(payload: T): ApiResponseSuccess<T> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ApiPayload = any;
+
+export function createSuccessResponse(payload: ApiPayload): ApiResponseSuccess<ApiPayload> {
   return {
     success: 1,
     payload,
